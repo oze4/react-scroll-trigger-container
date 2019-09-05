@@ -28,12 +28,14 @@ export default function AppScrollTrigger() {
     return (
         <>
             <div ref={r => myRef = r} style={containerStyle} >
+                <div>
                 {Array.from(new Array(TOTAL_FAKE_PAGES), (el, index) => (
                     <ScrollTrigger containerRef={myRef} onProgress={handleOnProgress} >
                         <div style={fakePageStyle}>
                         </div>
                     </ScrollTrigger>
                 ))}
+                </div>
             </div>
             <div className="sticky">
                 <pre>{JSON.stringify(progressData, null, 2)}</pre>
