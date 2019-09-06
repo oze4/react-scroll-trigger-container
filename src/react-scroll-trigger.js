@@ -73,6 +73,24 @@ class ScrollTrigger extends Component {
                 addEventListener('resize', this.onResizeThrottled);
             }
         }
+
+        if (prevProps.containerRef !== this.props.containerRef) {
+            if (this.props.containerRef !== (document.documentElement || 'html')) {
+                this.setState({
+                    isCustomContainerRef: true
+                });
+                removeEventListener('resize', this.onResizeThrottled);
+                removeEventListener('scroll', this.onScrollThrottled);
+                this.props.containerRef.addEventListener('resize', this.onResizeThrottled)
+                this.props.containerRef.addEventListener('scroll', this.onScrollThrottled);
+            } else {
+                this.props.containerRef.removeEventListener('resize', this.onResizeThrottled);
+                this.props.containerRef.removeEventListener('scroll', this.onScrollThrottled);
+                addEventListener('resize', this.onResizeThrottled);
+                addEventListener('scroll', this.onScrollThrottled);
+            }
+            this.checkStatus();
+        }
     }
 
     componentWillUnmount() {
@@ -109,16 +127,21 @@ class ScrollTrigger extends Component {
         const element = ReactDOM.findDOMNode(this.element);
         const elementRect = element.getBoundingClientRect();
         const viewportStart = 0;
+
         const scrollingElement = typeof containerRef === 'string'
             ? document.querySelector(containerRef)
             : containerRef;
+
         const viewportEnd = containerRef === document.documentElement
             ? Math.max(containerRef.clientHeight, window.innerHeight || 0)
             : scrollingElement.clientHeight;
+
         const inViewport = elementRect.top <= viewportEnd && elementRect.bottom >= viewportStart;
+
         const position = this.state.isCustomContainerRef
             ? containerRef.scrollTop
             : window.scrollY;
+
         const velocity = lastScrollPosition && lastScrollTime
             ? Math.abs((lastScrollPosition - position) / (lastScrollTime - Date.now()))
             : null;
