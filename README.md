@@ -1,3 +1,10 @@
+I wanted a way to be able to key on nested <code>div</code>'s within a <code>div</code>, which was not possible.
+I made [this demo](https://react-scroll-trigger-container.litpoc.com) to show how you can track <code>div</code>'s within a scrollable <code>div</code>, while still keeping the original functionality in tact. 
+
+If you scroll to the *very* bottom of the demo page, you can test out "regular" functionality. 
+
+===
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

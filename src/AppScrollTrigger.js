@@ -80,16 +80,22 @@ export default function AppScrollTrigger() {
 
                 <div id="placeholder_for_scroll_bottom"></div> {/* YOU CAN IGNORE THIS */}
             </div>
-            <div>
+            <div className="ta-center">
                 <h2>
-                    I wanted a way to be able to key on nested <code>div</code>'s within a <code>div</code>
+                    I wanted a way to be able to key on nested <code>div</code>'s within a <code>div</code>, which was not possible before.
+                </h2>
+                <h2>
+                    I made this demo to show how you can track <code>div</code>'s within a scrollable <code>div</code>, while still keeping the original functionality in tact.  
+                </h2>
+                <h2>
+                    If you scroll to the *very* bottom of this page, you can test out "regular" functionality. 
                 </h2>
             </div>
             {Array.from(new Array(50), (el, index) => (
                 <p key={index}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse scelerisque, lectus in pharetra blandit, augue mauris pulvinar erat, ut euismod nibh lectus sed diam. Nulla fringilla ultrices ligula. Aliquam vitae felis metus. Maecenas lacinia bibendum accumsan. Curabitur lobortis convallis purus non imperdiet. Morbi ut vulputate mauris. Curabitur lacinia faucibus volutpat. Nulla elit tortor, rhoncus ut luctus eget, blandit in risus. Integer accumsan ullamcorper lorem id porttitor. Aliquam vitae libero eget magna mollis gravida.</p>
             ))}
             <ScrollTrigger onEnter={handleRegularEnter('HIII')} onProgress={handleRegularProgress}>
-                <div style={{ height: '600px' }}>
+                <div style={{ height: '100vh' }}>
                     <h1>HIIIII</h1>
                     <pre>onEnter('{regularEnter}')</pre>
                     <pre>{JSON.stringify(regularProgress, null, 2)}</pre>
