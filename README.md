@@ -3,7 +3,7 @@ I made [this demo](https://react-scroll-trigger-container.litpoc.com) to show ho
 
 If you scroll to the *very* bottom of the demo page, you can test out "regular" functionality. 
 
-===
+##
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
