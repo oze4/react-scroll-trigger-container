@@ -1,7 +1,41 @@
+# Why?
 ### I wanted a way to be able to key on nested <code>div</code>'s within a <code>div</code>, which was not possible before.
 ### I made [this demo](https://react-scroll-trigger-container.litpoc.com) to show how you can track <code>div</code>'s within a scrollable <code>div</code>, while still keeping the original functionality in tact. 
 
 ### If you scroll to the *very* bottom of the demo page, you can test out "regular" functionality. 
+
+# How?
+
+```jsx
+    /** 
+     * Scrollable div container is needed
+     * 
+     * We need the 'ref' from this container div, since this component will be loaded before our 'ref',
+     * is ready I find it easier to store the 'ref' in state. 
+     */
+    const [myRef, setMyRef] = useState();
+    <div ref={r => setMyRef(r)} style={{ height: '300px', overflow: 'scroll'}}>
+        {/** 
+          * ScrollTrigger must use the 'ref' inside of the 'containerRef' prop!
+          *  
+          * Use an array of components. This allows you to trigger when a component
+          * becomes visible within the scrollable div 
+          */}
+        {myObjects.map((obj, index) => {
+            return (
+                <ScrollTrigger                     
+                    containerRef={myRef} 
+                    onEnter={e => alert(`${obj.attribute} at index ${index} is now visible inside scrollable div!`)} 
+                    onExit={e => alert(`${obj.attribute} at index ${index} is no longer visible inside scrollable div!`)} 
+                    onProgress={e => alert(`${obj.attribute} Progress: ${e}`)} 
+                    key={`${obj.attribute}_${index}`} 
+                >
+                    <SomeOtherComponent someProp={obj.attribute} />
+                </ScrollTrigger>
+            )
+        })}
+    </div>
+```
 
 ##
 

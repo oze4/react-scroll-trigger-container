@@ -16,6 +16,40 @@ let fakePageStyle = {
 
 const TOTAL_FAKE_PAGES = 6;
 
+let example_code_how_to_use = `
+    /** 
+     * Scrollable div container is needed
+     * 
+     * We need the 'ref' from this container div, since this component will be loaded before our 'ref',
+     * is ready I find it easier to store the 'ref' in state. 
+     */
+    
+    const [myRef, setMyRef] = useState();
+    
+    <div ref={r => setMyRef(r)} style={{ height: '300px', overflow: 'scroll'}}>
+        
+        {/** 
+          * ScrollTrigger must use the 'ref' inside of the 'containerRef' prop!
+          *  
+          * Use an array of components. This allows you to trigger when a component
+          * becomes visible within the scrollable div 
+          */}
+        {myObjects.map((obj, index) => {
+            return (
+                <ScrollTrigger                     
+                    containerRef={myRef} 
+                    onEnter={e => alert(\`\${obj.attribute} at index \${index} is now visible inside scrollable div!\`)} 
+                    onExit={e => alert(\`\${obj.attribute} at index \${index} is no longer visible inside scrollable div!\`)} 
+                    onProgress={e => alert(\`\${obj.attribute} Progress: \${e}\`)} 
+                    key={\`\${obj.attribute}_\${index}\`} 
+                >
+                    <SomeOtherComponent someProp={obj.attribute} />
+                </ScrollTrigger>
+            )
+        })}
+    </div>
+`
+
 
 export default function AppScrollTrigger() {
     const [visible, setVisible] = useState([]);
@@ -92,9 +126,13 @@ export default function AppScrollTrigger() {
                 </h2>
                 <h2>
                     You can find the code for this demo <a rel="noopener noreferrer" target="_blank" href="https://github.com/oze4/react-scroll-trigger-container">at the following location...</a>
-                </h2>
+                </h2>                
             </div>
-            {Array.from(new Array(50), (el, index) => (
+            <div>
+                <h2>Example:</h2>
+                <pre>{example_code_how_to_use}</pre>
+            </div>
+            {Array.from(new Array(30), (el, index) => (
                 <p key={index}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse scelerisque, lectus in pharetra blandit, augue mauris pulvinar erat, ut euismod nibh lectus sed diam. Nulla fringilla ultrices ligula. Aliquam vitae felis metus. Maecenas lacinia bibendum accumsan. Curabitur lobortis convallis purus non imperdiet. Morbi ut vulputate mauris. Curabitur lacinia faucibus volutpat. Nulla elit tortor, rhoncus ut luctus eget, blandit in risus. Integer accumsan ullamcorper lorem id porttitor. Aliquam vitae libero eget magna mollis gravida.</p>
             ))}
             <ScrollTrigger onEnter={handleRegularEnter('HIII')} onProgress={handleRegularProgress}>
