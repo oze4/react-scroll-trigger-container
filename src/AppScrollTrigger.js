@@ -91,7 +91,7 @@ export default function AppScrollTrigger() {
                     If you scroll to the *very* bottom of this page, you can test out "regular" functionality. 
                 </h2>
                 <h2>
-                    You can find the code for this demo <a rel="noopener noreferrer" target="_blank" href="https://github.com/oze4/react-scroll-trigger-update">at the following location...</a>
+                    You can find the code for this demo <a rel="noopener noreferrer" target="_blank" href="https://github.com/oze4/react-scroll-trigger-container">at the following location...</a>
                 </h2>
             </div>
             {Array.from(new Array(50), (el, index) => (
