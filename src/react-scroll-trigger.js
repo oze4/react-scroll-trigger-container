@@ -29,9 +29,7 @@ class ScrollTrigger extends Component {
     componentDidMount() {
         // Tells us if a custom 'containerRef' has been supplied as a prop.    
         if (this.props.containerRef !== (document.documentElement || 'html')) {
-            this.setState({
-                isCustomContainerRef: true
-            });
+            this.setState({ isCustomContainerRef: true });
             this.props.containerRef.addEventListener('resize', this.onResizeThrottled)
             this.props.containerRef.addEventListener('scroll', this.onScrollThrottled);
         } else {
@@ -75,15 +73,15 @@ class ScrollTrigger extends Component {
         }
 
         if (prevProps.containerRef !== this.props.containerRef) {
+            // Tells us if a custom 'containerRef' has been supplied as a prop.  
             if (this.props.containerRef !== (document.documentElement || 'html')) {
-                this.setState({
-                    isCustomContainerRef: true
-                });
+                this.setState({ isCustomContainerRef: true });
                 removeEventListener('resize', this.onResizeThrottled);
                 removeEventListener('scroll', this.onScrollThrottled);
                 this.props.containerRef.addEventListener('resize', this.onResizeThrottled)
                 this.props.containerRef.addEventListener('scroll', this.onScrollThrottled);
             } else {
+                this.setState({ isCustomContainerRef: false });
                 this.props.containerRef.removeEventListener('resize', this.onResizeThrottled);
                 this.props.containerRef.removeEventListener('scroll', this.onScrollThrottled);
                 addEventListener('resize', this.onResizeThrottled);
